@@ -153,7 +153,7 @@ Ein anderes Problem ist dass die gesammelten Informationen auch sensible persone
 Eine Angriffstechnik die auf den zuvor beschriebenen Angriff aufbaut, ist der so genannte Man-In-The-Middle (MITM) Angriff. Bei dieser Angriffstechnik handelt es sich grundsätzlich um eine Kombination aus mehreren Angriffstechniken. Ein Man-In-The-Middle Angriff ist eine Kombination aus Abhören von Daten, Verändern von Daten und Weitersenden von Daten. Dabei beruht dieser Angriff stark auf der Schwachstelle, dass die Kommunikation zwischen RFID Lesegerät und Transponder unverschlüsselt stattfindet. In Fig. \ref{fig3} ist der Ablauf eines solchen Angriffs schematisch dargestellt.
 
 \begin{figure}[htbp]
-\centerline{\includegraphics[width=0.45\textwidth]{img/MITM.png}}
+\centerline{\includegraphics[width=0.5\textwidth]{img/MITM.png}}
 \caption{Ablauf eines Man-In-The-Middle Angriffs}
 \label{fig3}
 \end{figure}
@@ -168,10 +168,17 @@ Dies stellt ein erhebliches Problem im Bezug auf das Vertrauen und die Dateninte
 
 
 \section{Sicherheitsmaßnahmen}
-Nun wurden eine Reihe von Schwachstellen und Angriffstechniken beleuchtet, welche ernsthafte Probleme für die Sicherheit und Privatsphäre der Nutzer solcher Systeme darstellen. Als nächstes werden Sicherheitsmaßnahmen vorgestellt, die die schwere der vorgestellten Schwachstellen abmildern können, oder sogar ganz verhindern können. Dazu wird für jede Schwachstelle separat beleuchtet, wie dieses Problem abgesichert werden kann.
+Nun wurden eine Reihe von Schwachstellen und Angriffstechniken beleuchtet, welche ernsthafte Probleme für die Sicherheit und Privatsphäre der Nutzer solcher Systeme darstellen. Viele der Schwachstellen wurden im Laufe der Jahre bereits behoben oder sind nur noch teilweise vorhanden. Aus diesem Grund werden als nächstes Sicherheitsmaßnahmen vorgestellt, die die schwere der vorgestellten Schwachstellen abmildern können, oder sogar ganz verhindern können. Dazu wird für jede Schwachstelle separat beleuchtet, wie dieses Problem abgesichert werden kann. Generell gilt für viele der hier vorgestellten Sicherheitsmaßnahmen, dass deren Sicherheit abhängt von 
 
 \subsection{Authentifikation}
-[WORK IN PROGRESS]
+Wie bereits in dem vorherigen Abschnitt gesehen, stellt es ein großes Problem dar, wenn ein Transponder ohne Authentifizierung ausgelesen werden kann. Besonders wenn dieser Transponder für sicherheitskritische Systeme wie Türsteuerungen eingesetzt wird. Dies würde das einfache Auslesen und Kopieren eines Transponders ermöglichen. Um dieses Problem zu verhindern ist es notwendig eine Authentifizierung vor Datenaustausch mit dem Transponder durchzuführen. Dazu gibt es verschiedene Ansätze, die eine Authentifizierung zwischen Lesegerät und Transponder realisieren. Die Ansätze unterscheiden sich im wesentlichen an deren Sicherheit und Komplexität. Im folgenden wird der Ansatz der MIFARE Classic EV1 4k erläutert \cite{b4}.
+
+\begin{figure}[htbp]
+\centerline{\includegraphics[width=0.5\textwidth]{img/three_pass.png}}
+\caption{Drei-Phasen-Authentifikation der MIFARE Classic}
+\label{fig4}
+\end{figure}
+
 
 \subsection{Lesegerät kennt Daten nicht}
 [WORK IN PROGRESS]
