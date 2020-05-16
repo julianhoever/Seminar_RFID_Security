@@ -146,7 +146,22 @@ Mit der Möglichkeit, das Lesegerät für einen kurzen Moment zu blockieren, las
 Anstatt die Übertragung mittels Denial of Service Angriffe zu unterbinden, kann es auch von Interesse sein eine Übertragung abzuhören. Dies ist möglich, da die Kommunikation zwischen Lesegerät und Transponder grundlegend ohne Verschlüsselung stattfindet \cite{b3}. Ein Angriff sieht wie folgt aus. Ein Angreifer begibt sich mit einem passenden Lesegerät in die Reichweite eines anderen Lesegerätes bei dem gerade eine Kommunikation zwischen Lesegerät und Transponder stattfindet. Der Angreifer kann über sein Lesegerät die Daten, die zwischen den legitimen Lesegerät und Transponder ausgetauscht werden, abhören und aufzeichnen. Wenn der Angreifer die Daten aufgezeichnet haben sollte, kann er diese Daten zu einem späteren Zeitpunkt dazu nutzen um diese selber an das Lesegerät zu versenden und damit eine Kommunikation mit dem echten Transponder vorzutäuschen \cite{b8}. Ein anderes Problem ist dass die gesammelten Informationen auch sensible personenbezogene Daten sein können, was dann eine Einschränkung der Privatsphäre bedeutet.
 
 \subsection{Man-In-The-Middle Angriff}
-[WORK IN PROGRESS]
+Eine Angriffstechnik die auf den zuvor beschriebenen Angriff aufbaut, ist der so genannte Man-In-The-Middle (MITM) Angriff. Bei dieser Angriffstechnik handelt es sich grundsätzlich um eine Kombination aus mehreren Angriffstechniken. Ein Man-In-The-Middle Angriff ist eine Kombination aus Abhören von Daten, Verändern von Daten und Weitersenden von Daten. In Fig. \ref{fig3} ist der Ablauf eines solchen Angriffs schematisch dargestellt.
+
+\begin{figure}[htbp]
+\centerline{\includegraphics[width=0.45\textwidth]{img/MITM.png}}
+\caption{Ablauf eines Man-In-The-Middle Angriffs}
+\label{fig3}
+\end{figure}
+
+Für einen Man-In-The-Middle Angriff muss der Angreifer in der Lage sein die eigentliche Kommunikation zwischen Lesegerät und Transponder zu unterbrechen. Ist die Unterbrechung erfolgt muss nahtlos die die Kommunikation über den Angreifer umgeleitet werden, damit das Lesegerät diese Unterbrechung nicht bemerkt. Ist dieses Umleiten über den Angreifer erfolgreich durchgeführt worden, werden sämtliche Nachrichten die zwischen Lesegerät und Transponder ausgetauscht werden zuerst über den Angreifer weitergeleitet, der diese dann ebenfalls an den Transponder oder das Lesegerät weiterleitet. Dadurch ist der Angreifer in der Lage die gesamte Kommunikation zwischen Lesegerät und Transponder aufzuzeichnen ohne dass das Lesegerät diese Umleitung bemerkt.
+
+Das Umleiten der Kommunikation ist in Fig. \ref{fig3} dargestellt als Doppelpfeil von Lesegerät zu Angreifer und Angreifer zu Transponder. Das rote Kreuz stellt die unterbrochene Kommunikation zwischen Lesegerät und Transponder dar.
+
+Der Angreifer ist jedoch nicht nur in der Lage die Kommunikation zu belauschen. Da er sich unbemerkt zwischen der Kommunikation von Lesegerät und Transponder befindet und im Prinzip nur die Nachrichten weiterleitet die er erhält, ist er auch in der Lage die Nachrichten vor der Weiterleitung zu modifizieren oder blockieren. Der Transponder oder das Lesegerät ist dabei nicht in der Lage zu entscheiden ob die Pakete tatsächlich von dem legitimen Kommunikationspater oder von einem Angreifer kommen. Dadurch ist der Angreifer in der Lage falsche Informationen zu verteilen und den Datenaustausch zwischen Lesegerät und Transponder zu steuern wie es ihm beliebt.
+
+Dies stellt ein erhebliches Problem im Bezug auf das Vertrauen und die Datenintegrität einer RFID/NFC Kommunikation dar.
+
 
 \section{Sicherheitsmaßnahmen}
 [WORK IN PROGRESS]
