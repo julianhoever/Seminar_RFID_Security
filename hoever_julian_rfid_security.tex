@@ -138,7 +138,15 @@ Für einen Transponder der in einen solchen Faradayschen Käfig gebracht wird, b
 Ein daraus resultierendes Angriffsszenario wäre beispielsweise die Diebstahlsicherung von Waren im Einzelhandel. Bei der Diebstahlsicherung von beispielsweise Kleidung werden RFID Transponder dazu genutzt um einen Alarm auszulösen, wenn eine Person, ohne die Kleidung zu bezahlen, den Laden verlässt. Dieses unbefugte Verlassen des Ladens wird von RFID Lesegeräten am Ausgang des Ladens bemerkt, indem die RFID Transponder in den Kleidungsstücken beim Durchqueren der Lesegeräten erkannt werden. Wurde das Diebesgut aber vor Verlassen des Ladens in einen Faradayschen Käfig verstaut kann die Person den Laden verlassen ohne das die Lesegeräte am Ausgang Alarm schlagen. Dies kann unter Umständen für einen Einzelhändler hohe Verluste bedeuten.
 
 \subsubsection{Angriff auf Lesegeräte}
-Eine andere Möglichkeit einen Denial of Service Angriff durchzuführen ist, indem man versucht ein Lesegerät funktionsunfähig zu machen. Dabei wird ausgenutzt, dass ein aktives RFID/NFC Lesegerät jeden RFID/NFC Transponder in seiner Umgebung auslesen muss um zu entscheiden ob er wichtig für die Anwendung des Lesegerätes ist. Dieser Lesevorgang eines Transponders dauert einen kleine Zeitspanne, in der das Lesegerät nicht in der Lage ist andere Transponder zu lesen. Das bedeutet es gibt die Möglichkeit ein Lesegerät für einen kurzen Moment zu blockieren \cite{b3}. 
+Eine andere Möglichkeit einen Denial of Service Angriff durchzuführen ist, indem man versucht ein Lesegerät funktionsunfähig zu machen. Dabei wird ausgenutzt, dass ein aktives RFID/NFC Lesegerät jeden RFID/NFC Transponder in seiner Umgebung auslesen muss um zu entscheiden ob er wichtig für die Anwendung des Lesegerätes ist. Dieser Lesevorgang eines Transponders dauert einen kleine Zeitspanne, in der das Lesegerät nicht in der Lage ist andere Transponder zu lesen. Das bedeutet es gibt die Möglichkeit ein Lesegerät für einen kurzen Moment zu blockieren \cite{b3}.
+
+Mit der Möglichkeit, das Lesegerät für einen kurzen Moment zu blockieren, lassen sich so genannte Jammer bauen. Ein Jammer ist ein Gegenstand auf dem eine große Anzahl an RFID Transpondern installiert ist. Gelangt so ein Jamming Gerät in die Reichweite eines Lesegerätes, kann dieses Lesegerät, durch die hohe Anzahl an gleichzeitigen Antworten, funktionsunfähig gemacht werden. Dies kann ebenfalls dafür genutzt werden um beispielsweise eine Diebstahlsicherung von Waren zu umgehen. Wenn man mit einer Ware mit RFID Transponder und dem Jammer durch die Lesegeräte am Ausgang des Geschäftes geht, sind diese Lesegeräte mit der Anzahl der RFID Transpondern überfordert und schlagen ebenfalls keinen Alarm.
+
+\subsection{Abhören der Kommunikation}
+Anstatt die Übertragung mittels Denial of Service Angriffe zu unterbinden, kann es auch von Interesse sein eine Übertragung abzuhören. Dies ist möglich, da die Kommunikation zwischen Lesegerät und Transponder grundlegend ohne Verschlüsselung stattfindet \cite{b3}. Ein Angriff sieht wie folgt aus. Ein Angreifer begibt sich mit einem passenden Lesegerät in die Reichweite eines anderen Lesegerätes bei dem gerade eine Kommunikation zwischen Lesegerät und Transponder stattfindet. Der Angreifer kann über sein Lesegerät die Daten, die zwischen den legitimen Lesegerät und Transponder ausgetauscht werden, abhören und aufzeichnen. Wenn der Angreifer die Daten aufgezeichnet haben sollte, kann er diese Daten zu einem späteren Zeitpunkt dazu nutzen um diese selber an das Lesegerät zu versenden und damit eine Kommunikation mit dem echten Transponder vorzutäuschen \cite{b8}. Ein anderes Problem ist dass die gesammelten Informationen auch sensible personenbezogene Daten sein können, was dann eine Einschränkung der Privatsphäre bedeutet.
+
+\subsection{Man-In-The-Middle Angriff}
+[WORK IN PROGRESS]
 
 \section{Sicherheitsmaßnahmen}
 [WORK IN PROGRESS]
@@ -166,6 +174,8 @@ Eine andere Möglichkeit einen Denial of Service Angriff durchzuführen ist, ind
 \bibitem{b6} R. Verdult and F. Kooman, "Practical Attacks on NFC Enabled Cell Phones," 2011 Third International Workshop on Near Field Communication, Hagenberg, 2011, pp. 77-82, doi: 10.1109/NFC.2011.16.
 
 \bibitem{b7} S. Skowron, Animation zur Ladungsverschiebung bei einem faradayschen Käfig. [Online]. Available: https://commons.wikimedia.org/ wiki/File:Faraday\_cage.gif\#/media/Datei:Faraday\_cage.gif
+
+\bibitem{b8} G. Kulkarni, R. Shelke, R. Sutar and S. Mohite, "“RFID security issues \& challenges”," 2014 International Conference on Electronics and Communication Systems (ICECS), Coimbatore, 2014, pp. 1-4, doi: 10.1109/ECS.2014.6892730.
 
 \end{thebibliography}
 \end{document}
