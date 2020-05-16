@@ -143,10 +143,14 @@ Eine andere Möglichkeit einen Denial of Service Angriff durchzuführen ist, ind
 Mit der Möglichkeit, das Lesegerät für einen kurzen Moment zu blockieren, lassen sich so genannte Jammer bauen. Ein Jammer ist ein Gegenstand auf dem eine große Anzahl an RFID Transpondern installiert ist. Gelangt so ein Jamming Gerät in die Reichweite eines Lesegerätes, kann dieses Lesegerät, durch die hohe Anzahl an gleichzeitigen Antworten, funktionsunfähig gemacht werden. Dies kann ebenfalls dafür genutzt werden um beispielsweise eine Diebstahlsicherung von Waren zu umgehen. Wenn man mit einer Ware mit RFID Transponder und dem Jammer durch die Lesegeräte am Ausgang des Geschäftes geht, sind diese Lesegeräte mit der Anzahl der RFID Transpondern überfordert und schlagen ebenfalls keinen Alarm.
 
 \subsection{Abhören der Kommunikation}
-Anstatt die Übertragung mittels Denial of Service Angriffe zu unterbinden, kann es auch von Interesse sein eine Übertragung abzuhören. Dies ist möglich, da die Kommunikation zwischen Lesegerät und Transponder grundlegend ohne Verschlüsselung stattfindet \cite{b3}. Ein Angriff sieht wie folgt aus. Ein Angreifer begibt sich mit einem passenden Lesegerät in die Reichweite eines anderen Lesegerätes bei dem gerade eine Kommunikation zwischen Lesegerät und Transponder stattfindet. Der Angreifer kann über sein Lesegerät die Daten, die zwischen den legitimen Lesegerät und Transponder ausgetauscht werden, abhören und aufzeichnen. Wenn der Angreifer die Daten aufgezeichnet haben sollte, kann er diese Daten zu einem späteren Zeitpunkt dazu nutzen um diese selber an das Lesegerät zu versenden und damit eine Kommunikation mit dem echten Transponder vorzutäuschen \cite{b8}. Ein anderes Problem ist dass die gesammelten Informationen auch sensible personenbezogene Daten sein können, was dann eine Einschränkung der Privatsphäre bedeutet.
+Anstatt die Übertragung mittels Denial of Service Angriffe zu unterbinden, kann es auch von Interesse sein eine Übertragung abzuhören. Dies ist möglich, da die Kommunikation, nach ISO/IEC 18000, zwischen Lesegerät und Transponder grundlegend ohne Verschlüsselung stattfindet \cite{b3}. Der Grund für die meist fehlende Verschlüsselung bei der Kommunikation sind die Kosten und der Aufwand der damit verbunden ist. Jedoch ist die Technik dadurch verwundbar, was in einigen Situationen ein Problem darstellt.
+
+Ein Angriff sieht wie folgt aus. Ein Angreifer begibt sich mit einem passenden Lesegerät in die Reichweite eines anderen Lesegerätes bei dem gerade eine Kommunikation zwischen Lesegerät und Transponder stattfindet. Der Angreifer kann über sein Lesegerät die Daten, die zwischen den legitimen Lesegerät und Transponder ausgetauscht werden, abhören und aufzeichnen. Wenn der Angreifer die Daten aufgezeichnet haben sollte, kann er diese Daten zu einem späteren Zeitpunkt dazu nutzen um diese selber an das Lesegerät zu versenden und damit eine Kommunikation mit dem echten Transponder vorzutäuschen \cite{b8}. 
+
+Ein anderes Problem ist dass die gesammelten Informationen auch sensible personenbezogene Daten enthalten können, was eine Einschränkung der Privatsphäre bedeutet, wenn man diese Daten unverschlüsselt im Klartext überträgt.
 
 \subsection{Man-In-The-Middle Angriff}
-Eine Angriffstechnik die auf den zuvor beschriebenen Angriff aufbaut, ist der so genannte Man-In-The-Middle (MITM) Angriff. Bei dieser Angriffstechnik handelt es sich grundsätzlich um eine Kombination aus mehreren Angriffstechniken. Ein Man-In-The-Middle Angriff ist eine Kombination aus Abhören von Daten, Verändern von Daten und Weitersenden von Daten. In Fig. \ref{fig3} ist der Ablauf eines solchen Angriffs schematisch dargestellt.
+Eine Angriffstechnik die auf den zuvor beschriebenen Angriff aufbaut, ist der so genannte Man-In-The-Middle (MITM) Angriff. Bei dieser Angriffstechnik handelt es sich grundsätzlich um eine Kombination aus mehreren Angriffstechniken. Ein Man-In-The-Middle Angriff ist eine Kombination aus Abhören von Daten, Verändern von Daten und Weitersenden von Daten. Dabei beruht dieser Angriff stark auf der Schwachstelle, dass die Kommunikation zwischen RFID Lesegerät und Transponder unverschlüsselt stattfindet. In Fig. \ref{fig3} ist der Ablauf eines solchen Angriffs schematisch dargestellt.
 
 \begin{figure}[htbp]
 \centerline{\includegraphics[width=0.45\textwidth]{img/MITM.png}}
@@ -164,8 +168,25 @@ Dies stellt ein erhebliches Problem im Bezug auf das Vertrauen und die Dateninte
 
 
 \section{Sicherheitsmaßnahmen}
+Nun wurden eine Reihe von Schwachstellen und Angriffstechniken beleuchtet, welche ernsthafte Probleme für die Sicherheit und Privatsphäre der Nutzer solcher Systeme darstellen. Als nächstes werden Sicherheitsmaßnahmen vorgestellt, die die schwere der vorgestellten Schwachstellen abmildern können, oder sogar ganz verhindern können. Dazu wird für jede Schwachstelle separat beleuchtet, wie dieses Problem abgesichert werden kann.
+
+\subsection{Authentifikation}
 [WORK IN PROGRESS]
 
+\subsection{Lesegerät kennt Daten nicht}
+[WORK IN PROGRESS]
+
+\subsection{Lesegerät muss Transponder lesen}
+[WORK IN PROGRESS]
+
+\subsection{Eindeutige Identifikation}
+[WORK IN PROGRESS]
+
+\subsection{Energieversorgung}
+[WORK IN PROGRESS]
+
+\subsection{Übertragung}
+[WORK IN PROGRESS]
 
 \section{Durchführbarkeit der Angriffe}
 [WORK IN PROGRESS]
