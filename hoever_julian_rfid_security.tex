@@ -35,7 +35,6 @@ Aus diesem Grund wird in dieser Arbeit dargestellt, was die Probleme und möglic
 
 Zu Beginn wird dazu in Abschnitt 2 auf die Grundlagen der RFID/NFC Technik eingegangen. Anschließend beschreibt Abschnitt 3 was RFID/NFC konzeptionell für Schwachstellen besitzt. Darauf aufbauend wird dann in Abschnitt 4 erläutert was sich für mögliche Angriffe, auf die Sicherheit des Systems und die Privatsphäre der Nutzer, aus den in Abschnitt 3 genannten Schwachstellen ergeben. In Abschnitt 5 werden mögliche Sicherheitsmaßnahmen skizziert, welche Angriffe auf diese Technik erschweren und in Abschnitt 6 wird diskutiert wie durchführbar die vorgestellten Angriffe auf RFID Systeme in der Praxis überhaupt sind.
 
-
 \section{Grundlagen}
 
 \subsection{RFID Technik}
@@ -49,7 +48,21 @@ Radio Frequency Identification (RFID) ist eine Technik um kontaktlos Daten mitte
 
 Das Lesegerät (Reader) induziert über die spulenförmig angeordnete Antenne des Transponders, eine Spannung und Taktfrequenz, welche den Transponder mit dem nötigen Strom versorgt damit eine Kommunikation zwischen Lesegerät und Transponder stattfinden kann. Anschließend sendet das Lesegerät eine Anfrage an den Transponder, woraufhin ihm der Transponder seine Daten die er enthält übermittelt.
 
-Bei den RFID Transpondern wird unterschieden zwischen passiven und aktiven Transpondern.
+Das Frequenzspektrum von RFID ist hauptsächlich aufgeteilt in drei verschiedene Frequenzbänder. Diese Frequenzbänder sind:
+\begin{itemize}
+\item LF (Low frequency)
+\item HF (High frequency)
+\item UHF (Ultra high frequency)
+\end{itemize}
+Die Beschränkung von RFID auf diese drei Frequenzbänder ermöglicht es internationale Kompatibilität sicherzustellen \cite{b9}. Jedoch gibt es trotzdem in einigen Regionen leichte Abweichungen in den Frequenzen. Zum Beispiel nutzt Europa für das UHF Band die Frequenzen 866-868 MHz und die USA nutzt stattdessen die Frequenzen 902-928 MHz \cite{b9}. Fig. \ref{fig1.2} zeigt die Einordnung der Frequenzen in das Frequenzspektrum. Dabei werden für RFID hautsächlich die in Fig. \ref{fig1.2} markierten Frequenzen 125/134 kHz, 13.56 MHz, 868/915 MHz, 2.45 GHz, und 5.8 GHz genutzt. 
+
+\begin{figure}[htbp]
+\centerline{\includegraphics[width=0.5\textwidth]{img/frequenzen.png}}
+\caption{Frequenzspektrum \cite{b9}}
+\label{fig1.2}
+\end{figure}
+
+Abgesehen von den Frequenzbändern wird bei den RFID Transpondern unterschieden zwischen passiven und aktiven Transpondern.
 \begin{itemize}
 \item Passive Transponder besitzen keine eigene Spannungsquelle und erreichen dadurch lediglich eine Reichweite von weniger als 4 Metern \cite{b1}.
 \item Aktive Transponder hingegen besitzen zusätzlich noch eine eingebaute Spannungsquelle, meist in Form einer Batterie. Dadurch sind Reichweiten von über 100 Metern möglich \cite{b1}.
@@ -57,7 +70,7 @@ Bei den RFID Transpondern wird unterschieden zwischen passiven und aktiven Trans
 Wie bereits in der Einleitung angemerkt fokussiert sich diese Arbeit ausschließlich auf die passiven Transponder, da diese in im alltäglichen Leben, im Gegensatz zu den aktiven Transpondern, von größerer Bedeutung sind.
 
 \subsection{NFC Technik}
-NFC steht für Near Field Communication und ist ein Standard der der mit einer Frequenz von 13.56 MHz und einer Übertragungsgeschwindigkeit von 424 KBit/s arbeitet \cite{b2}. Dieser Standard ist für Datenübertragungen von bis zu 10 cm ausgelegt und setzt technisch direkt auf der RFID Technik auf \cite{b2}. Dies ermöglicht mittels eines NFC Lesegeräts, beispielsweise Smartphones, sogar RFID Transponder auszulesen. Zum Lesen und Schreiben wird auch hier ebenfalls mit einer spulenförmigen Antenne gearbeitet.
+NFC steht für Near Field Communication und ist ein Standard der der mit einer Frequenz von 13.56 MHz und einer Übertragungsgeschwindigkeit von 424 KBit/s arbeitet \cite{b2}. Somit ist die NFC Technik auf dem High Frequency (HF) Frequenzband angesiedelt. Dieser Standard ist für Datenübertragungen von bis zu 10 cm ausgelegt und setzt technisch direkt auf der RFID Technik auf \cite{b2}. Dies ermöglicht mittels eines NFC Lesegeräts, beispielsweise Smartphones, sogar RFID Transponder auszulesen. Zum Lesen und Schreiben wird auch hier ebenfalls mit einer spulenförmigen Antenne gearbeitet.
 
 NFC kann in 3 Betriebsmodi betrieben werden \cite{b2}:
 
@@ -72,7 +85,6 @@ Bei dem Peer-to-Peer Modus findet zwischen beiden Geräten ein bidirektionaler D
 Bei dem Lese-Schreib Modus fungiert das aktive Gerät als Lesegerät und das passive Gerät ist hierbei ein kompatibler passiver RFID Transponder zum Beispiel in einem Aufkleber oder einer Karte mit eingebautem RFID Transponder. Es ist in diesem Modus aber auch möglich, dass das aktive Gerät einen RFID Transponder, welcher noch nie beschrieben wurde, beschreibt.
 
 Bei dem Kartenemulationsmodus simuliert das NFC Gerät einen passiven RFID Transponder was bedeutet, das dieses Gerät keinerlei Berechnungen durchführt und lediglich die festgelegten Daten an ein anfragendes Lesegerät übermittelt. Dies findet zum Beispiel beim kontaktlosen Bezahlen mittels Smartphone Anwendung.
-
 
 \section{Schwachstellen}
 Die RFID und NFC Technik besitzt vielerlei Schwachstellen und diese sind zum Großteil sowohl auf RFID als auch auf NFC anzuwenden. Der wichtigste Unterschied zwischen RFID und NFC ist die Reichweite auf denen diese Technik operiert. Bei NFC muss der Angriff viel näher am Lesegerät stattfinden als bei RFID, da mit passiven RFID Transpondern Reichweiten von bis zu 4 Metern erreicht werden können. Im folgenden werden einige mögliche Schwachstellen beider Techniken aufgelistet.
@@ -166,12 +178,13 @@ Der Angreifer ist jedoch nicht nur in der Lage die Kommunikation zu belauschen. 
 
 Dies stellt ein erhebliches Problem im Bezug auf das Vertrauen und die Datenintegrität einer RFID/NFC Kommunikation dar.
 
-
 \section{Sicherheitsmaßnahmen}
-Nun wurden eine Reihe von Schwachstellen und Angriffstechniken beleuchtet, welche ernsthafte Probleme für die Sicherheit und Privatsphäre der Nutzer solcher Systeme darstellen. Viele der Schwachstellen wurden im Laufe der Jahre bereits behoben oder sind nur noch teilweise vorhanden. Aus diesem Grund werden als nächstes Sicherheitsmaßnahmen vorgestellt, die die schwere der vorgestellten Schwachstellen abmildern können, oder sogar ganz verhindern können. Dazu wird für jede Schwachstelle separat beleuchtet, wie dieses Problem abgesichert werden kann. Generell gilt für viele der hier vorgestellten Sicherheitsmaßnahmen, dass deren Sicherheit abhängt von 
+Nun wurden eine Reihe von Schwachstellen und Angriffstechniken beleuchtet, welche ernsthafte Probleme für die Sicherheit und Privatsphäre der Nutzer solcher Systeme darstellen. Viele der Schwachstellen wurden im Laufe der Jahre bereits behoben oder sind nur noch teilweise vorhanden. Aus diesem Grund werden als nächstes Sicherheitsmaßnahmen vorgestellt, die die schwere der vorgestellten Schwachstellen abmildern können, oder sogar ganz verhindern können. Dazu wird für jede Schwachstelle separat beleuchtet, wie dieses Problem abgesichert werden kann. Generell gilt für viele der hier vorgestellten Sicherheitsmaßnahmen, dass je leistungsfähiger ein Transponder ist, desto mehr Sicherheit ist potenziell möglich. Dies spiegelt sich dann aber auch im Preis des Transponders wieder. Damit muss für jede Anwendung abgewogen werden wie viel Sicherheit für ein System benötigt wird.
 
 \subsection{Authentifikation}
-Wie bereits in dem vorherigen Abschnitt gesehen, stellt es ein großes Problem dar, wenn ein Transponder ohne Authentifizierung ausgelesen werden kann. Besonders wenn dieser Transponder für sicherheitskritische Systeme wie Türsteuerungen eingesetzt wird. Dies würde das einfache Auslesen und Kopieren eines Transponders ermöglichen. Um dieses Problem zu verhindern ist es notwendig eine Authentifizierung vor Datenaustausch mit dem Transponder durchzuführen. Dazu gibt es verschiedene Ansätze, die eine Authentifizierung zwischen Lesegerät und Transponder realisieren. Die Ansätze unterscheiden sich im wesentlichen an deren Sicherheit und Komplexität. Im folgenden wird der Ansatz der MIFARE Classic EV1 4k erläutert \cite{b4}.
+Wie bereits in dem vorherigen Abschnitt gesehen, stellt es ein großes Problem dar, wenn ein Transponder ohne Authentifizierung ausgelesen werden kann. Besonders wenn dieser Transponder für sicherheitskritische Systeme wie Türsteuerungen eingesetzt wird. Dies würde das einfache Auslesen und Kopieren eines Transponders ermöglichen. Um dieses Problem zu verhindern ist es notwendig eine Authentifizierung vor Datenaustausch mit dem Transponder durchzuführen. Dazu gibt es verschiedene Ansätze, die eine Authentifizierung zwischen Lesegerät und Transponder realisieren. Die Ansätze unterscheiden sich im wesentlichen an deren Sicherheit und Komplexität. Im folgenden wird der Ansatz der MIFARE Classic EV erläutert \cite{b4}, jedoch gibt es noch diverse  weitere Möglichkeiten.
+
+Der MIFARE Classic EV1 ist ein RFID Transponder, der auf dem NFC Frequenzband (HF) mit einer Frequenz von 13.56 MHz und einer Reichweite von 10 cm agiert \cite{b4}. Dieser leistungsfähige Transponder ist in der Lage Berechnungen durchzuführen was bei der Authentifizierung genutzt wird. Der Speicher dieses Transponders ist aufgeteilt in Sektoren und jeder Sektor ist nochmals unterteilt in 16 Byte Blöcke. Jeder Sektor kann von dem Lesegerät separat ausgelesen werden und für jeden Sektor muss eine separate Authentifizierung zwischen Lesegerät und Transponder erfolgen. Um für jeden Sektor eine eigenständige Authentifikation durchzuführen, ist der letzte Block eines jeden Sektors (Sector Trailer) wichtig. Dieser Block enthält drei Informationen: Einen Schlüssel A, Zugriffsbedingungen und optional noch einen Schlüssel B. Für die eigentliche Authentifikation nutzt der MIFARE Classic EV1 ein so genanntes Drei-Phasen-Authentifizierungsprotokoll. Der Ablauf dieses Protokolls ist in Fig. \ref{fig4} schematisch dargestellt.
 
 \begin{figure}[htbp]
 \centerline{\includegraphics[width=0.5\textwidth]{img/three_pass.png}}
@@ -179,6 +192,17 @@ Wie bereits in dem vorherigen Abschnitt gesehen, stellt es ein großes Problem d
 \label{fig4}
 \end{figure}
 
+Zu Beginn der Authentifizierung wählt das Lesegerät den Sektor aus, der gelesen werden soll und wählt einen Schlüssel A oder B des Transponders aus, der für die Authentifizierung verwendet werden soll. Diese Daten sendet das Lesegerät an den Transponder. 
+
+Anschließend, im ersten Durchlauf der Drei-Phasen-Authentifizierung, ließt der Transponder aus dem Sector Trailer für den angefragten Sektor den gewünschten Schlüssel und die Zugriffsbedingungen aus. Zum Abschluss des ersten Durchlaufs antwortet der Transponder dem Lesegerät, indem er dem Lesegerät eine Zahl als Herausforderung (Challenge) sendet. Ab dem Punkt wo das Lesegerät diese Zahl erhält, ist die weitere Kommunikation zwischen Lesegerät und Transponder verschlüsselt.
+
+Nachdem das Lesegerät die Zahl vom Transponder erhalten hat, beginnt der zweite Durchlauf. Das Lesegerät berechnet mittels des gewählten Schlüssels und zusätzlichen Informationen eine Antwort auf die Herausforderung. Daraufhin sendet das Lesegerät die Antwort auf die Herausforderung und zusätzlich eine Zahl als Herausforderung für den Transponder an den RFID Transponder. Damit ist der zweite Durchlauf beendet.
+
+Im dritten und letzten Durchlauf erhält der Transponder die gelöste Herausforderung vom Lesegerät und verifiziert die Korrektheit der Lösung. Ist dies der Fall, berechnet der Transponder die Lösung zu der Herausforderung  vom Lesegerät und sendet diese Lösung wieder zurück zum Lesegerät. Das Lesegerät verifiziert diese Lösung ebenfalls und wenn die Lösung korrekt ist, ist die Authentifizierung damit erfolgreich abgeschlossen.
+
+Das bedeutet diese Art der Authentifikation beruht darauf, dass beide Kommunikationspartner den korrekten Schlüssel für den jeweiligen Sektor besitzen. Dies hat den Vorteil, da das Lesegerät nur Sektoren des Transponders lesen kann für den es auch den geheimen Schlüssel kennt. Damit ist ein effektives Berechtigungsmanagement möglich, indem jedem Lesegerät nur die Schlüssel für Sektoren bereitgestellt werden, die es auch lesen können soll.
+
+Die beschriebene Art der Authentifizierung stellt damit eine Möglichkeit dar RFID Transponder vor unberechtigtem Kopieren und vervielfältigen zu schützen. Jedoch wird für diese Methode ein Transponder vorausgesetzt, welcher über eine größere Leistung verfügt um Berechnungen durchzuführen und zufällige Herausforderungen generieren kann.
 
 \subsection{Lesegerät kennt Daten nicht}
 [WORK IN PROGRESS]
@@ -198,10 +222,8 @@ Wie bereits in dem vorherigen Abschnitt gesehen, stellt es ein großes Problem d
 \section{Durchführbarkeit der Angriffe}
 [WORK IN PROGRESS]
 
-
 \section{Fazit}
 [WORK IN PROGRESS]
-
 
 \begin{thebibliography}{00}
 \bibitem{b1} Chih-Yung Chen, Chien-Ping Kuo and Fang-Yuan Chien, "An exploration of RFID information security and privacy," 2009 Joint Conferences on Pervasive Computing (JCPC), Tamsui, Taipei, 2009, pp. 65-70, doi: 10.1109/JCPC.2009.5420211.
@@ -219,6 +241,8 @@ Wie bereits in dem vorherigen Abschnitt gesehen, stellt es ein großes Problem d
 \bibitem{b7} S. Skowron, Animation zur Ladungsverschiebung bei einem faradayschen Käfig. [Online]. Available: https://commons.wikimedia.org/ wiki/File:Faraday\_cage.gif\#/media/Datei:Faraday\_cage.gif
 
 \bibitem{b8} G. Kulkarni, R. Shelke, R. Sutar and S. Mohite, "“RFID security issues \& challenges”," 2014 International Conference on Electronics and Communication Systems (ICECS), Coimbatore, 2014, pp. 1-4, doi: 10.1109/ECS.2014.6892730.
+
+\bibitem{b9} P. Kitsos and Y. Zhang, "RFID Security: Techniques, Protocols and System-on-Chip Design", DOI: 10.1007/978-0-387-76481-8
 
 \end{thebibliography}
 \end{document}
