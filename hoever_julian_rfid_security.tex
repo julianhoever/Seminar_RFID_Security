@@ -204,6 +204,8 @@ Das bedeutet diese Art der Authentifikation beruht darauf, dass beide Kommunikat
 
 Die beschriebene Art der Authentifizierung stellt damit eine Möglichkeit dar RFID Transponder vor unberechtigtem Kopieren und vervielfältigen zu schützen. Jedoch wird für diese Methode ein Transponder vorausgesetzt, welcher über eine größere Leistung verfügt um Berechnungen durchführen zu können und zufällige Herausforderungen generieren zu können. Eine andere einfachere Methode wäre wenn das Lesegerät dem Transponder ein einfaches Passwort übermitteln würde und der Transponder dieses Passwort dann lediglich nur mit dem korrekten Passwort abgleicht. Diese Methode hat aber die große Schwachstelle, dass die Übertragung des Passwortes im Klartext erfolgt und somit mitgelesen werden kann. Dadurch wäre die Sicherheit des Passwortes gefährdet, was dazu führt, dass die Transponder wieder kopiert werden können. Aus diesem Grund ist die Methode wie vom MIFARE Classic EV1 implementiert, der einfachen Passwort Methode zu bevorzugen.
 
+Eine weitere Möglichkeit, die zusätzlich neben einer einer starken Authentifizierung für Sicherheit sorgt, ist das Verringern des Funktionsradius eines RFID Transponders. Damit wird es erschwert aus der Distanz Kopierversuche zu unternehmen. Beispielsweise wird das beim kontaktlosen Bezahlen mittels Bankkarten so gemacht.
+
 \subsection{Lesegerät kennt Daten nicht}
 Ein weiteres Problem von RFID Systemen ist es dass das Lesegerät die Daten des Transponder auslesen und verarbeiten muss. Jedoch kann es, wie im vorherigen Abschnitt gesehen, sein, dass die Daten des Transponders Schadcode wie SQL Injections enthalten. Wenn diese so wie sie sind, beispielsweise von einer Datenbank, verarbeitet werden, kann dadurch ein beachtlicher Schaden entstehen. Aus diesem Grund müssen die Daten vor der Weitergabe in tiefere Softwarestrukturen vorverarbeitet werden oder erst gar nicht Daten von unautorisierten Transpondern zu lesen.
 
@@ -264,6 +266,28 @@ Der Datenpfad-Block in der Fig. \ref{fig6} ist für die grundlegenden Berechnung
 Neben AES gibt es weitere Verschlüsselungsverfahren, welche sich eigenen um auf einem RFID Transponder eingesetzt zu werden. Das AES Verschlüsselungsverfahren ist an der Stelle lediglich ein Beispiel für ein gängiges Verfahren. Jedoch ist nicht jedes Verfahren gleich sicher und es gibt jeweils zu jedem Verfahren vor und Nachteile. Diese müssen für jedes RFID System bei der Planung mit berücksichtigt werden. Durch den Einsatz guter Verschlüsselung wird das Mitlesen von Kommunikation zwischen Lesegerät und Transponder unterbunden. Durch dieses Unterbinden der Möglichkeit, die Kommunikation zwischen Lesegerät und Transponder mitzulesen, wird auch die Gefahr durch Man-In-The-Middle Angriffe verhindert. Dies liegt daran, dass ein sinnvoller Man-In-The-Middle Angriff darauf beruht die Kommunikation mitzulesen und bestimmte Stellen der Übertragung zu manipulieren. Durch Verschlüsselung kann ein Angreifer den Datenstrom ohne Kenntnis des Schlüssels nicht mehr sinnvoll manipulieren.
 
 \section{Durchführbarkeit der Angriffe}
+Nachdem nun zu den Schwachstellen passende Sicherheitsvorkehrungen vorgestellt wurden, wird an dieser Stelle diskutiert wie durchführbar die vorgestellten Angriffe sind und welche praktische Relevanz diese haben. Dazu wird in diesem Abschnitt für jeden der vorgestellten Angriffsszenarien aus Abschnitt IV separat diskutiert wie durchführbar und relevant diese Angriffe sind.
+
+\subsection{Kopieren von Transpondern}
+Das Kopieren von Transpondern ist grundsätzlich ein sehr leicht durchzuführender Angriff, welcher unbemerkt innerhalb weniger Sekunden durchgeführt werden kann, indem beispielsweise ein mittels eines kurzen Kontaktes mit einem liegengebliebenen Schlüsselbund oder Brieftasche die RFID Transponder kopiert werden können. Jedoch besitzen heutzutage die meisten Transponder, wie beispielsweise in Karten zum kontaktlosen Bezahlen oder Transpondern zum öffnen von Türschlössern, wirkungsvolle Authentifizierungsmaßnahmen um ein Kopieren oder nicht autorisiertes Auslesen zu verhindern. Benutzt jedoch ein wichtiges System noch Transponder ohne Authentifizierung stellt das ein erhebliches Sicherheitsrisiko dar.
+
+\subsection{Kompromittieren des Lesegerätes}
+Der Angriff mittels Schadcode auf den Transponder hat ein hohes Schadenspotential. Ist es nicht leicht eine beispielsweise SQL Injection mittels RFID Transponder durchzuführen. Zum einen sollten die Daten eines RFID Transponders wie Nutzerdaten behandelt werden, was bedeutet, dass diese nicht ohne Vorverarbeitung in tiefere Systembereiche wie Datenbanken vordringen können. Eine weitere Hürde ist, dass der RFID Transponder überhaupt erst von einem Lesegerät gelesen werden muss. Dies ist bei einem Lesegerät, welches eine Authentifikation mit dem Transponder durchführt, sehr schwer umzusetzen ohne die Identität eines gültigen Transponders zu stehlen. Damit ist es nur schwer durchführbar ein System mittels eines RFID Transponders zu kompromittieren.
+
+\subsection{Erweitern von NFC zu Bluetooth}
+Die Durchführbarkeit dieses Angriffes hängt stark von der Vorsicht der Nutzer ab, welche das Smartphone oder NFC fähige Gerät benutzen. Die Koppelung selbst ist durch die geringe Reichweite von NFC beim Koppeln verhältnismäßig sicher. Und es ist durch die Koppelung mittels NFC nicht mehr nötig ein Passwort für die Bluetooth-Verbindung einzugeben, welches potentiell ein Angriffspunkt für Brute-Force Angriffe war. Jedoch wenn ein Nutzer eines Smartphones unvorsichtig Bluetooth-Verbindungen mit unbekannten Geräten per NFC koppelt, können von diesen unbekannten Geräten durchaus ein Schadenspotential ausgehen.
+
+\subsection{Tracking durch Transponder IDs}
+Ein weitaus durchführbarer Angriff und Bedrohung für die Privatsphäre der Nutzer ist das Tracking mittes Transponder IDs.
+
+
+\subsection{Denial of Service Angriffe}
+[WORK IN PROGRESS]
+
+\subsection{Abhören der Kommunikation}
+[WORK IN PROGRESS]
+
+\subsection{Man-In-The-Middle Angriff}
 [WORK IN PROGRESS]
 
 \section{Fazit}
