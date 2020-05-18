@@ -202,22 +202,66 @@ Im dritten und letzten Durchlauf erhält der Transponder die gelöste Herausford
 
 Das bedeutet diese Art der Authentifikation beruht darauf, dass beide Kommunikationspartner den korrekten Schlüssel für den jeweiligen Sektor besitzen. Dies hat den Vorteil, da das Lesegerät nur Sektoren des Transponders lesen kann für den es auch den geheimen Schlüssel kennt. Damit ist ein effektives Berechtigungsmanagement möglich, indem jedem Lesegerät nur die Schlüssel für Sektoren bereitgestellt werden, die es auch lesen können soll.
 
-Die beschriebene Art der Authentifizierung stellt damit eine Möglichkeit dar RFID Transponder vor unberechtigtem Kopieren und vervielfältigen zu schützen. Jedoch wird für diese Methode ein Transponder vorausgesetzt, welcher über eine größere Leistung verfügt um Berechnungen durchzuführen und zufällige Herausforderungen generieren kann.
+Die beschriebene Art der Authentifizierung stellt damit eine Möglichkeit dar RFID Transponder vor unberechtigtem Kopieren und vervielfältigen zu schützen. Jedoch wird für diese Methode ein Transponder vorausgesetzt, welcher über eine größere Leistung verfügt um Berechnungen durchführen zu können und zufällige Herausforderungen generieren zu können. Eine andere einfachere Methode wäre wenn das Lesegerät dem Transponder ein einfaches Passwort übermitteln würde und der Transponder dieses Passwort dann lediglich nur mit dem korrekten Passwort abgleicht. Diese Methode hat aber die große Schwachstelle, dass die Übertragung des Passwortes im Klartext erfolgt und somit mitgelesen werden kann. Dadurch wäre die Sicherheit des Passwortes gefährdet, was dazu führt, dass die Transponder wieder kopiert werden können. Aus diesem Grund ist die Methode wie vom MIFARE Classic EV1 implementiert, der einfachen Passwort Methode zu bevorzugen.
 
 \subsection{Lesegerät kennt Daten nicht}
-[WORK IN PROGRESS]
+Ein weiteres Problem von RFID Systemen ist es dass das Lesegerät die Daten des Transponder auslesen und verarbeiten muss. Jedoch kann es, wie im vorherigen Abschnitt gesehen, sein, dass die Daten des Transponders Schadcode wie SQL Injections enthalten. Wenn diese so wie sie sind, beispielsweise von einer Datenbank, verarbeitet werden, kann dadurch ein beachtlicher Schaden entstehen. Aus diesem Grund müssen die Daten vor der Weitergabe in tiefere Softwarestrukturen vorverarbeitet werden oder erst gar nicht Daten von unautorisierten Transpondern zu lesen.
+
+Sich nur darauf zu verlassen, dass ein Transponder, der sich erfolgreich bei einem Lesegerät autorisieren konnte, nur ungefährliche Daten übermittelt ist gefährlich. Es kann durchaus sein, dass es eine unentdeckte Schwachstelle bei der Autorisierung vorliegt und diese genutzt wurde um einen Transponder mit Schadcode zu generieren, der sich problemlos autorisieren kann. Wenn sich nur auf eine einwandfreie Autorisierung verlassen wird, würde in dem Fall der Schadcode trotzdem ungehindert in das Softwaresystem vordringen können.
+
+Jedoch kann man zusätzlich die Daten, die man von einem autorisierten RFID Transponder liest, vorverarbeiten um zusätzlich das Eindringen von Schadcode in tiefere Softwarestrukturen zu verhindern. Eine Möglichkeit ist, die Eingabedaten zu in Form eines Strings, vor der Weitergabe in tiefere Systembereiche mit Escape-Sequenzen zu versehen. Dies sorgt dafür, dass bei der Verarbeitung oder Speicherung dieser Daten von einer Datenbank kein Schadenspotential mehr besteht.
+
+Generell sollten beim Entwurf von RFID Systemen darauf geachtet werden, dass die Daten, die von einem RFID Transponder übermittelt werden, immer mit großer Vorsicht verarbeitet werden. Diese Daten müssen wie Nutzereingaben gesehen werden und es darf sich nicht auf die Richtigkeit dieser Daten verlassen werden.
+
+Ein Problem bei dem es auch darum ging, dass Daten mit Schadcode auf ein Lesegerät übertragen werden war das Erweitern von NFC auf Bluetooth. Viele IoT Geräte und Smartphones besitzen die Möglichkeit mittels NFC eine Bluetooth-Verbindung zu etablieren. Über diese Bluetooth-Verbindung kann dann Schadcode auf das Zielgerät geladen werden. Um dies zu verhindern besteht erneut die Möglichkeit dass sich die beiden Geräte vor der Koppelung mit Bluetooth über NFC authentifizieren müssen. Weiter sollte bei jedem Koppelungsversuch, sei es auch nur zum Übertragen kleinerer Datenmengen, der Nutzer nach seinem ausdrücklichen Einverständnis gefragt werden. Damit kann die Sicherheit dieser technischen Möglichkeit verbessert werden.
 
 \subsection{Lesegerät muss Transponder lesen}
-[WORK IN PROGRESS]
-
-\subsection{Eindeutige Identifikation}
-[WORK IN PROGRESS]
+Die Schwachstelle, dass das Lesegerät den RFID Transponder lesen muss wenn er in Reichweite kommt, hatte, wie in einem vorherigen Abschnitt dargestellt wurde, zur Folge, dass es möglich war eine Lesegerät mittels Denial of Service Angriff zu blockieren. Dies war über die so genannten Jamming Geräte möglich. Diesem Problem kann man entgegenwirken, indem man ein Antikollisionsverfahren implementiert. Jedoch kann dadurch ein Angriff durch Denial of Service nur erschwert werden aber nicht verhindert werden.
 
 \subsection{Energieversorgung}
-[WORK IN PROGRESS]
+Eine andere Art des Denial of Service ist es, wie in einem vorherigen Abschnitt gesehen, wenn man einen Transponder mittels Faradayschen Käfig abschirmt. Dadurch wird die Energieversorgung des Transponders unterbunden und es können keine Daten gelesen werden, beziehungsweise für das Lesegerät ist dieser Transponder gar nicht sichtbar. Diese Schwachstelle von RFID Systemen stellt, wie bereits erläutert, in der Diebstahlsicherung ein großes Problem dar, da es möglich ist unbemerkt Ware durch die Lesegeräte am Ausgang eines Geschäftes zu schmuggeln.
+
+Es ist aber nicht ohne weiteres möglich diese Schwachstelle abzusichern, da RFID darauf beruht die Transponder über ein elektrisches Feld mit Energie zu versorgen. Aus diesem Grund stellt die Abschirmung der Transponder mittels eines Faradayschen Käfigs ein ernsthaftes Problem für diese Technik dar. Um die Schwere dieses Problems abzumildern, kann sie mit anderen Techniken kombiniert werden, wie zum Beispiel Videoüberwachungssysteme oder den Einsatz eines Ladendetektiv. Es muss sich individuell für jedes RFID System überlegt werden wie mit dem Problem der Abschirmung umgegangen werden soll.
+
+\subsection{Eindeutige Identifikation}
+Jeder RFID Transponder besitzt eine eindeutige Kennung mit der es möglich ist ein Tracking von RFID Transpondern durchzuführen. Dazu wurden in einem vorherigen Abschnitt das Szenario von der Verfolgung von Mitarbeitern in einem Unternehmen durch RFID Transponder und die Verfolgung von Kunden in einem Geschäft diskutiert. Dies waren beides Szenarien die massiv die Privatsphäre von Menschen beeinträchtigt haben. Um diesem Problem entgegenzuwirken gibt es auch hier wieder verschiedene Ansätze.
+
+Um Tracking vollständig zu unterbinden kann ein Transponder jedes Mal wenn er von einem Lesegerät gelesen wird eine zufällige ID generieren und dem Lesegerät zusenden. Dadurch kann ein Lesegerät zu einem späteren Zeitpunkt einen bereits gelesenen Transponder nicht wiedererkennen, da sich die ID des Transponders in beiden Lesevorgängen unterscheidet. Jedoch hat diese Art der vollständigen Anonymisierung auch Nachteile. Möglicherweise ist es in manchen Anwendungen gewünscht, dass Transponder bestimmten Personen oder dem System selber zugeordnet werden können.
+
+Eine Möglichkeit dieses Problem zu lösen ist das randomisierte HashLock Schema von Weis, Sarma, Rivest und Engels \cite{b9}. Bei diesem Ansatz wird bei jedem Auslesen eines Transponders eine andere Identifikationsnummer übermittelt. Der Ablauf der randomisierten HashLock Variante wird in Fig. \ref{fig5} dargestellt.
+
+\begin{figure}[htbp]
+\centerline{\includegraphics[width=0.5\textwidth]{img/hashlock.png}}
+\caption{Ablauf des randomisierten HashLock Schemas \cite{b9}}
+\label{fig5}
+\end{figure}
+
+Jeder Transponder besitzt bei diesem Verfahren eine eindeutige Identifikationsnummer ($ID$), die sich systemintern zuordnen lässt. Liest nun ein Lesegerät diesen RFID Transponder aus, generiert dieser Transponder eine Nonce $r$. Diese Nonce ist eine zufällige Zahl welche nach Möglichkeit nur ein Mal verwendet werden darf. Anschließend berechnet der Transponder aus der Nonce $r$, der geheimen Identifikationsnummer $ID$ und einer Hashfunktion $h$ einen Hash $h(ID, r)$. 
+
+Eine Hashfunktion ist eine nicht umkehrbare Funktion, welche eine Eingabe auf eine (in der Regel) kleiner Ausgabe abbildet. Eine Hashfunktion sollte dabei möglichst für jede Eingabe auf eine andere Ausgabe abbilden, was bei einer kleineren Ausgabemenge nicht möglich ist.
+
+Wurde der Hash $h(ID, r)$ vom Transponder berechnet, sendet dieser, wie in Fig. \ref{fig5} dargestellt, das Ergebnis des Hashes und zusätzlich die Nonce $r$ zurück an das Lesegerät. Die Anwendung die die Daten des Lesegerätes verarbeitet kann dann, die in einer Datenbank gespeicherten Identifikationsnummern aller systemzugehörigen Transponder vergleichen ob eine Identifikationsnummer gehasht mit der Nonce den gleichen Hash ergibt wie der übermittelte Hash.
+
+Dieses Vergleichen aller Identifikationsnummern mit dem übermittelten Hash ist eine sehr rechenaufwendige Operation \cite{b9}. Es gibt aber noch weitere Ansätze die sich diesem Problem annehmen. Des Weiteren sollte dieses randomisierte HashLock Verfahren nicht, ohne zusätzliche Authentifikation, zum authentifizieren von Transpondern genutzt werden, da es einen effektiven und simplen Angriff gegen dieses Verfahren gibt \cite{b9}.
+
+Ein Angreifer könnte den Austausch der gehashten Identifikationsnummer und der Nonce mitschneiden. Dies ist möglich, da die Kommunikation zwischen Lesegerät und Transponder unverschlüsselt erfolgt. Anschließend kann der Angreifer diesen mitgeschnittenen Hash und Nonce dazu nutzen sich selber bei dem Lesegerät zu authentifizieren. Aus diesem Grund sollte dieses Verfahren nur in Kombination mit anderen Authentifikationsverfahren verwendet werden.
 
 \subsection{Übertragung}
-[WORK IN PROGRESS]
+Ein weiteres beschriebenes Problem ist dass die Übertragung zwischen Lesegerät und Transponder im Klartext stattfindet. Dies sorgt dafür, dass die Kommunikation von einem Angreifer mitgeschnitten werden kann. Daraus resultiert eine ganze Reihe an Schwachstellen. Zum einen ermöglicht das Fehlen einer Verschlüsselung in RFID Kommunikation die oben beschriebenen Man-In-The-Middle Angriffe. Zum anderen bedeutet die fehlende Verschlüsselung aber auch Probleme für Protokolle wie das im Unterkapitel "Eindeutige Identifikation" des Abschnitts "Sicherheitsmaßnahmen" beschriebene HashLock Verfahren \cite{b9}. Aus diesem Grund muss eine Kommunikation zwischen RFID Lesegerät und Transponder durch eine Verschlüsselung abgesichert werden. 
+
+Für passive RFID Transponder eignen sich nicht alle gängigen Verschlüsselungsverfahren \cite{b9}. Der Grund dafür ist, dass RFID Transponder durch ihren geringen Stromverbrauch, der kleinen Bauteilgröße und und  der begrenzten Taktfrequenz nur sehr begrenzte Möglichkeiten bieten effektive Verschlüsselungsalgorithmen zu implementieren.
+
+Ein Verschlüsselungsalgorithmus für den es Implementationen für passive RFID Transponder gibt, ist der so genannte AES Algorithmus. Bei diesem Algorithmus handelt sich es um ein symmetrisches Blockchiffrierungsverfahren, welches sich leicht in Hardware implementieren lässt und dabei weiterhin performant ist \cite{b9}. Bei einem Blockchiffrierungsverfahren handelt es sich um ein Verschlüsselungsverfahren, bei dem Klartextblöcke fester Länge auf Geheimtextblöcke, meist gleich langer, fester Länge abgebildet werden. Ist ein Klartextblock nicht ausreichend groß um die feste Länge zu erfüllen, muss dieser Block bis zu der Länge aufgefüllt werden. Symmetrisch bedeutet in dem Kontext, dass für das AES Verfahren der selbe Schlüssel für das verschlüsseln und entschlüsseln verwendet wird. Die Architektur eines 8-Bit AES Moduls für eine Schlüssellänge von 128 Bit ist in Fig. \ref{fig6} abgebildet.
+
+\begin{figure}[htbp]
+\centerline{\includegraphics[width=0.5\textwidth]{img/AES.png}}
+\caption{Architektur eines 8-Bit AES Moduls \cite{b9}}
+\label{fig6}
+\end{figure}
+
+Der Datenpfad-Block in der Fig. \ref{fig6} ist für die grundlegenden Berechnungen zuständig, die für die Verschlüsselung und Entschlüsselung mittels AES Verfahren notwendig sind. Diese grundlegenden Berechnungen sind SubBytes, ShiftRows, MixColumns, AddRoundKey, InvSubBytes,  InvShiftRows und InvMixColumns. Diese Berechnungen arbeiten beim AES Verfahren mit einer Schlüssellänge von 128 Bit auf einer 4x4 Byte Matrix. Der 32x8 Bit = 128 Bit RAM enthält während der Laufzeit einen Zustand von 128 Bit als 4x4 Byte Matrix und einen 128 Bit Rundenschlüssel.
+
+Neben AES gibt es weitere Verschlüsselungsverfahren, welche sich eigenen um auf einem RFID Transponder eingesetzt zu werden. Das AES Verschlüsselungsverfahren ist an der Stelle lediglich ein Beispiel für ein gängiges Verfahren. Jedoch ist nicht jedes Verfahren gleich sicher und es gibt jeweils zu jedem Verfahren vor und Nachteile. Diese müssen für jedes RFID System bei der Planung mit berücksichtigt werden. Durch den Einsatz guter Verschlüsselung wird das Mitlesen von Kommunikation zwischen Lesegerät und Transponder unterbunden. Durch dieses Unterbinden der Möglichkeit, die Kommunikation zwischen Lesegerät und Transponder mitzulesen, wird auch die Gefahr durch Man-In-The-Middle Angriffe verhindert. Dies liegt daran, dass ein sinnvoller Man-In-The-Middle Angriff darauf beruht die Kommunikation mitzulesen und bestimmte Stellen der Übertragung zu manipulieren. Durch Verschlüsselung kann ein Angreifer den Datenstrom ohne Kenntnis des Schlüssels nicht mehr sinnvoll manipulieren.
 
 \section{Durchführbarkeit der Angriffe}
 [WORK IN PROGRESS]
