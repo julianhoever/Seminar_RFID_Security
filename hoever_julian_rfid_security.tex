@@ -278,20 +278,27 @@ Der Angriff mittels Schadcode auf den Transponder hat ein hohes Schadenspotentia
 Die Durchführbarkeit dieses Angriffes hängt stark von der Vorsicht der Nutzer ab, welche das Smartphone oder NFC fähige Gerät benutzen. Die Koppelung selbst ist durch die geringe Reichweite von NFC beim Koppeln verhältnismäßig sicher. Und es ist durch die Koppelung mittels NFC nicht mehr nötig ein Passwort für die Bluetooth-Verbindung einzugeben, welches potentiell ein Angriffspunkt für Brute-Force Angriffe war. Jedoch wenn ein Nutzer eines Smartphones unvorsichtig Bluetooth-Verbindungen mit unbekannten Geräten per NFC koppelt, können von diesen unbekannten Geräten durchaus ein Schadenspotential ausgehen.
 
 \subsection{Tracking durch Transponder IDs}
-Ein weitaus durchführbarer Angriff und Bedrohung für die Privatsphäre der Nutzer ist das Tracking mittes Transponder IDs.
+Ein weitaus durchführbarer Angriff und Bedrohung für die Privatsphäre der Nutzer ist das Tracking mittes Transponder IDs. Dabei ist die Frage ob das Tracking durch einen Angriff von außerhalb erfolgen soll oder aber ein System bewusst so designt wird, dass es Tracking ermöglicht.
+
+Prinzipiell ist es relativ leicht Tracking für außenstehende Angreifer zu untersagen, indem man, wie im Kapitel "Schutzmaßnahmen" skizziert, dafür sorgt, dass sich die übermittelte ID eines Transponders bei jedem Leseversuch ändert. Dabei ist es egal ob vollständig zufällige IDs generiert werden oder mittels randomisierten HashLock Verfahrens die IDs generiert werden. Wichtig ist nur, dass dabei für einen Außenstehenden bei jedem Auslesen eine andere ID übermittelt wird.
+
+Soll jedoch innerhalb eines Systems das Tracking ermöglicht werden, bieten sich Verfahren wie das HashLock Verfahren an um die Transponder innerhalb eines Systems verfolgen zu können. Damit ist Gefahr durch Tracking aber bewusst in ein  System implementiert worden und dadurch ist das Tracking innerhalb dieses Systems sehr leicht durchführbar.
 
 
 \subsection{Denial of Service Angriffe}
-[WORK IN PROGRESS]
+Ein ebenfalls leicht durchführbarer Angriff ist der Denial of Service Angriff bei dem der Transponder vor dem Lesegerät abgeschirmt wird. Diese Schwachstelle von RFID ist leicht durchzuführen, da es im Handel RFID blockierende Beutel zu kaufen gibt, welche im wesentlichen einen Faradayschen Käfig darstellen. In diesen Beuteln werden RFID Transponder nicht mit Energie versorgt, wenn sich ein Lesegerät in der Nähe befindet, da diese Beutel das elektrische Feld des Lesegerätes abschirmen. Neben der leichten Durchführbarkeit hat dieser Angriff auch ein hohes Schadenspotential wenn man das Szenario einer Diebstahlsicherung in Betracht zieht. Eine Diebstahlsicherung mittels RFID Transpondern kann damit sehr leicht umgangen werden und einen hohen Schaden bei dem Ladenbesitzer erzeugen.
 
-\subsection{Abhören der Kommunikation}
-[WORK IN PROGRESS]
+\subsection{Abhören der Kommunikation / Man-In-The-Middle Angriff}
+Die Schwachstelle dass sich RFID Kommunikation leicht abhören lässt, da die Kommunikation unverschlüsselt stattfindet, hat zu verschiedenen Problemen geführt. Zum einen ermöglicht es bei manchen Authentifizierungsprotokollen das mitlesen wichtiger Schlüssel oder Informationen. Zum anderen ermöglicht diese Schwachstelle aber auch die Durchführung von Man-In-The-Middle Angriffen. Um die Durchführbarkeit dieser Angriffe bewerten zu können müssen verschiedene Punkte betrachtet werden.
 
-\subsection{Man-In-The-Middle Angriff}
-[WORK IN PROGRESS]
+Zum einen wird je nach verwendeter RFID Technik eine gewisse Nähe zum Lesegerät und Transponder benötigt um die Kommunikation mitschneiden zu können. Besonders bei NFC mit der Reichweite von bis zu 10 cm ist das ein Problem. Dadurch ist es sehr schwer unbemerkt die Kommunikation abzuhören oder einen Man-In-The-Middle Angriff durchzuführen.
+
+Zum anderen stellt die Verwendung von Verschlüsselung ein enormes Problem für diese Technik dar. Wenn eine Kommunikation zwischen Lesegerät und Transponder verschlüsselt ist muss der Angreifer sowohl beim einfachen Abhören, als auch beim Man-In-The-Middle Angriff die verwendeten Schlüssel kennen um einen sinnvollen Angriff durchzuführen.
+
+Aus diesen beiden genannten Gründen ist es nicht besonders leicht einen unbemerkten und sinnvollen Abhörangriff oder einen Man-In-The-Middle Angriff mittels RFID Technik durchzuführen. Jedoch hängt dies stark von der verwendeten Technik ab. RFID Transponder mit einer hohen Reichweite und keiner Verschlüsselung würden die Durchführbarkeit der Angriffe erhöhen.
 
 \section{Fazit}
-[WORK IN PROGRESS]
+Die kontaktlose RFID Technik bietet eine Vielzahl an Möglichkeiten wie beispielsweise der Komfort beim kontaktlosen Bezahlen oder die Möglichkeit Waren, nahezu unsichtbar, vor Diebstahl zu sichern. Jedoch müssen bei dem entwerfen eines RFID Systems die vorgestellten Schwachstellen in Betracht gezogen werden und für das zu entwickelnde System sinnvolle Sicherheitsmaßnahmen getroffen werden. Dies ist zwingend erforderlich, um die Angriffsfläche zu minimieren und die Durchführbarkeit von Angriffen zu erschweren. Des Weiteren sollte, je nach Anwendung, die Privatsphäre der Nutzer in Betracht gezogen werden und ebenfalls Schutzmaßnahmen ergriffen werden, um beispielsweise ein Tracking und ein Auslesen von sensiblen personenbezogenen Daten aus dem Transponder verhindern.
 
 \begin{thebibliography}{00}
 \bibitem{b1} Chih-Yung Chen, Chien-Ping Kuo and Fang-Yuan Chien, "An exploration of RFID information security and privacy," 2009 Joint Conferences on Pervasive Computing (JCPC), Tamsui, Taipei, 2009, pp. 65-70, doi: 10.1109/JCPC.2009.5420211.
