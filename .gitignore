@@ -1,4 +1,8 @@
 *.aux
 *.log
 *.gz
+*.nav
+*.toc
+*.out
+*.snm
 
