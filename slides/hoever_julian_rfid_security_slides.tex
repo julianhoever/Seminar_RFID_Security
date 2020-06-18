@@ -74,10 +74,54 @@
 \end{figure}
 \end{frame}
 
+
 \section{Schwachstellen}
 \begin{frame}
-\frametitle{}
+\frametitle{Schwachstellen}
 
+\begin{itemize}
+	\item Fehlende Authentifikation
+	\begin{itemize}
+		\item Transponder übermittelt Speicherinhalt auf Anfrage
+		\item Jedes Lesegerät kann den Transponder lesen
+	\end{itemize}
+	
+	\item Übertragung im Klartext
+	\begin{itemize}
+		\item Ursprünglich Übertragung im Klartext standardisiert
+		\item Übertragung kann abgehört werden
+	\end{itemize}
+	
+	\item Energieversorgung
+	\begin{itemize}
+		\item Energieversorgung durch das Lesegerät mittels Induktion
+		\item Passiver Transponder ist darauf angewiesen
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Schwachstellen}
+
+\begin{itemize}
+	\item Eindeutige Identifikation
+	\begin{itemize}
+		\item Identifizierung durch Speicherinhalt und Identifikationsnummer
+	\end{itemize}
+	
+	\item Lesegerät kennt Daten nicht
+	\begin{itemize}
+		\item Speicherinhalt kann Schadcode enthalten
+		\item z.B.: SQL Injections	
+		\item Bedrohung für Softwareinfrastruktur
+	\end{itemize}
+	
+	\item Lesegerät muss Transponder lesen
+	\begin{itemize}
+		\item Lesegerät kann nicht entscheiden wie relevant ein Transponder ist ohne ihn zu lesen
+		\item Lesevorgang belegt Rechenkapazität des Lesegerätes
+	\end{itemize}
+\end{itemize}
 \end{frame}
 
 \section{Angriffe auf Sicherheit und Privatsphäre}
