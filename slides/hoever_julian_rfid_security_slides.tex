@@ -100,6 +100,7 @@
 \end{itemize}
 \end{frame}
 
+
 \begin{frame}
 \frametitle{Schwachstellen}
 
@@ -111,8 +112,7 @@
 	
 	\item Lesegerät kennt Daten nicht
 	\begin{itemize}
-		\item Speicherinhalt kann Schadcode enthalten
-		\item z.B.: SQL Injections	
+		\item Daten müssen gelesen und verarbeitet werden
 		\item Bedrohung für Softwareinfrastruktur
 	\end{itemize}
 	
@@ -124,16 +124,139 @@
 \end{itemize}
 \end{frame}
 
+
 \section{Angriffe auf Sicherheit und Privatsphäre}
 \begin{frame}
-\frametitle{}
+\frametitle{Angriffe auf Sicherheit und Privatsphäre}
 
+\begin{itemize}
+	\item Folgende Schwachstellen werden genauer betrachtet:
+	\begin{itemize}
+		\item Fehlende Authentifikation
+		\item Lesegerät kennt Daten nicht
+		\item Energieversorgung
+	\end{itemize}
+\end{itemize}
 \end{frame}
+
+
+\begin{frame}
+\frametitle{Fehlende Authentifikation}
+
+\begin{itemize}
+	\item Unbefugte können Transponder lesen
+	\item Kopieren von Transpondern
+	\begin{itemize}
+		\item Jedes Lesegerät kann einen Transponder lesen
+		\item Gelesene Daten können auf neuen Transponder geschrieben werden
+		\item Daten der Kopie sind identisch mit dem Original
+		\item Flüchtigen Kontakt mit dem Originaltransponder 
+	\end{itemize}
+	\item Gefahr für beispielsweise Türsteuerungen
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Sicherheitsmaßnahmen}
+
+\begin{itemize}
+	\item Verschiedene Ansätze eine Authentifikation zu implementieren
+	\begin{itemize}
+		\item Unterscheidung in Sicherheit und Komplexität
+	\end{itemize}
+	
+	\item MIFARE Classic EV1 \footnote{https://www.nxp.com/docs/en/data-sheet/MF1S70YYX\_V1.pdf}
+	\begin{itemize}
+		\item RFID Transponder mit 13.56 MHz Frequenz
+		\item Speicher in Sektoren aufgeteilt
+		\item Sektoren unterteilt in 16 Byte Blöcke
+		\item Jeder Sektor kann separat ausgelesen werden
+		\begin{itemize}
+			\item Separate Authentisierung für jeden Sektor
+		\end{itemize}
+		\item Sector Trailer
+		\begin{itemize}
+			\item Letzter Block eines Sektors
+			\item Schlüssel A, Zugriffsbedingungen, Schlüssel B (optional)
+		\end{itemize}
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Sicherheitsmaßnahmen}
+
+\begin{itemize}
+	\item Drei-Phasen-Authentifikation der MIFARE Classic EV1 \footnote{https://www.nxp.com/docs/en/data-sheet/MF1S70YYX\_V1.pdf}
+\end{itemize}
+
+\begin{figure}
+\includegraphics[width=0.8\textwidth]{img/three_pass.png}
+\end{figure}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Sicherheitsmaßnahmen}
+
+\begin{itemize}
+	\item Rechteverwaltung durch Drei-Phasen-Authentifikation
+	\begin{itemize}
+		\item 
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Kompromittieren des Lesegerätes}
+
+\begin{itemize}
+	\item Lesegerät liest Speicher des Transponders aus
+	\item Ohne Authentifikation müssen alle Transponder gelesen werden
+	\begin{itemize}
+		\item Nicht vertrauenswürdige Transponder
+	\end{itemize}
+	\item Schadcode auf Transpondern
+	\begin{itemize}
+		\item z.B. SQL Injections
+	\end{itemize}
+	\item Daten können Softwareinfrastruktur schaden
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Energieversorgung}
+
+\begin{itemize}
+	\item Denial of Service Angriff
+	\begin{itemize}
+		\item Transponder wird vor elektrischem Feld des Lesegerätes abgeschirmt
+		\item Energieversorgung wird unterbunden
+		\item Lesegerät erkennt den Transponder nicht
+		\item Faradayscher Käfig
+	\end{itemize}
+	
+	\item Problem bei der Warensicherung mittels RFID
+\end{itemize}
+
+\begin{figure}
+\includegraphics[width=0.5\textwidth]{img/kaefig.png}
+\caption{Transponder im Faradayschen Käfig \footnote{https://commons.wikimedia.org/wiki/File:Faraday\_cage.gif\#/media/ Datei:Faraday\_cage.gif}}
+\end{figure}
+\end{frame}
+
 
 \section{Sicherheitsmaßnahmen}
 \begin{frame}
-\frametitle{}
+\frametitle{Sicherheitsmaßnahmen}
 
+\begin{itemize}
+	\item 
+\end{itemize}
 \end{frame}
 
 \section{Durchführbarkeit Angriffe}
