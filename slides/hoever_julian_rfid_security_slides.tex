@@ -20,7 +20,7 @@
 
 
 \begin{itemize}
-	\item RFID/NFC Technik kommt in vielen alltäglichen Anwendungen vor
+	\item RFID Technik kommt in vielen alltäglichen Anwendungen vor
 	\begin{itemize}
 		\item Kontaktloses Bezahlen
 		\item Personalausweisen
@@ -133,7 +133,7 @@
 	\item Folgende Schwachstellen werden genauer betrachtet:
 	\begin{itemize}
 		\item Fehlende Authentifikation
-		\item Lesegerät kennt Daten nicht
+%		\item Lesegerät kennt Daten nicht
 		\item Energieversorgung
 	\end{itemize}
 \end{itemize}
@@ -204,28 +204,47 @@
 \begin{itemize}
 	\item Rechteverwaltung durch Drei-Phasen-Authentifikation
 	\begin{itemize}
-		\item 
+		\item Separate Schlüssel für jeden Sektor
+		\item Lesegerät kann nur Sektoren lesen für das es den Schlüssel besitzt
+	\end{itemize}
+	\item Leistungsfähiger Transponder benötigt
+	\item Schutz vor Vervielfältigung und unberechtigtem Zugriff
+	
+	\item Alternatives Authentifikationsverfahren
+	\begin{itemize}
+		\item Einfaches Passwort
+		\item Kommunikationspartner tauchen Passwort zu Beginn aus
+		\item Problem: Übertragung im Klartext
 	\end{itemize}
 \end{itemize}
 \end{frame}
 
 
 \begin{frame}
-\frametitle{Kompromittieren des Lesegerätes}
+\frametitle{Durchführbarkeit}
 
 \begin{itemize}
-	\item Lesegerät liest Speicher des Transponders aus
-	\item Ohne Authentifikation müssen alle Transponder gelesen werden
-	\begin{itemize}
-		\item Nicht vertrauenswürdige Transponder
-	\end{itemize}
-	\item Schadcode auf Transpondern
-	\begin{itemize}
-		\item z.B. SQL Injections
-	\end{itemize}
-	\item Daten können Softwareinfrastruktur schaden
+\item
 \end{itemize}
 \end{frame}
+
+
+%\begin{frame}
+%\frametitle{Kompromittieren des Lesegerätes}
+%
+%\begin{itemize}
+%	\item Lesegerät liest Speicher des Transponders aus
+%	\item Ohne Authentifikation müssen alle Transponder gelesen werden
+%	\begin{itemize}
+%		\item Nicht vertrauenswürdige Transponder
+%	\end{itemize}
+%	\item Schadcode auf Transpondern
+%	\begin{itemize}
+%		\item z.B. SQL Injections
+%	\end{itemize}
+%	\item Daten können Softwareinfrastruktur schaden
+%\end{itemize}
+%\end{frame}
 
 
 \begin{frame}
@@ -234,10 +253,12 @@
 \begin{itemize}
 	\item Denial of Service Angriff
 	\begin{itemize}
-		\item Transponder wird vor elektrischem Feld des Lesegerätes abgeschirmt
-		\item Energieversorgung wird unterbunden
+		\item Transponder wird vor elektrischem Feld abgeschirmt
+		\begin{itemize}
+			\item[$\Rightarrow$] Faradayscher Käfig
+		\end{itemize}
+		\item Energieversorgung wird unterbunden 
 		\item Lesegerät erkennt den Transponder nicht
-		\item Faradayscher Käfig
 	\end{itemize}
 	
 	\item Problem bei der Warensicherung mittels RFID
@@ -250,25 +271,38 @@
 \end{frame}
 
 
-\section{Sicherheitsmaßnahmen}
 \begin{frame}
 \frametitle{Sicherheitsmaßnahmen}
 
 \begin{itemize}
-	\item 
+	\item Transponder sind abhängig von elektrischem Feld
+	\item Transponder für das Lesegerät nicht existent
+	\item Schwachstelle kann nicht ohne weiteres behoben werden
+	\item Zusätzliche Maßnahmen je nach Anwendung:
+	\begin{itemize}
+		\item Videoüberwachung
+		\item Ladendetektiv
+		\item ...
+	\end{itemize}
 \end{itemize}
 \end{frame}
 
-\section{Durchführbarkeit Angriffe}
-\begin{frame}
-\frametitle{}
 
+\begin{frame}
+\frametitle{Durchführbarkeit}
+
+\begin{itemize}
+\item
+\end{itemize}
 \end{frame}
 
 \section{Fazit}
 \begin{frame}
-\frametitle{}
+\frametitle{Fazit}
 
+\begin{itemize}
+\item
+\end{itemize}
 \end{frame}
 
 
