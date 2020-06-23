@@ -108,6 +108,7 @@
 	\item Eindeutige Identifikation
 	\begin{itemize}
 		\item Identifizierung durch Speicherinhalt und Identifikationsnummer
+		\item Ermöglicht Tracking
 	\end{itemize}
 	
 	\item Lesegerät kennt Daten nicht
@@ -153,6 +154,7 @@
 		\item Flüchtigen Kontakt mit dem Originaltransponder 
 	\end{itemize}
 	\item Gefahr für beispielsweise Türsteuerungen
+	\item Persönliche Daten könnten aus dem Transponder gelesen werden
 \end{itemize}
 \end{frame}
 
@@ -224,27 +226,16 @@
 \frametitle{Durchführbarkeit}
 
 \begin{itemize}
-\item
+	\item Kopieren und Auslesen sehr leicht durchführbar
+	\begin{itemize}
+		\item Kurzer Kontakt
+		\item Unbeaufsichtigte Brieftasche, Schlüsselbund, etc.
+	\end{itemize}
+	\item Heutzutage wirkungsvolle Authentifizierungsmaßnahmen
+	\item Transponder ohne Authentifizierung sind ein erhebliches Sicherheitsrisiko
+	\item Sicherheitsanforderungen hängen von Anwendung ab
 \end{itemize}
 \end{frame}
-
-
-%\begin{frame}
-%\frametitle{Kompromittieren des Lesegerätes}
-%
-%\begin{itemize}
-%	\item Lesegerät liest Speicher des Transponders aus
-%	\item Ohne Authentifikation müssen alle Transponder gelesen werden
-%	\begin{itemize}
-%		\item Nicht vertrauenswürdige Transponder
-%	\end{itemize}
-%	\item Schadcode auf Transpondern
-%	\begin{itemize}
-%		\item z.B. SQL Injections
-%	\end{itemize}
-%	\item Daten können Softwareinfrastruktur schaden
-%\end{itemize}
-%\end{frame}
 
 
 \begin{frame}
@@ -292,7 +283,12 @@
 \frametitle{Durchführbarkeit}
 
 \begin{itemize}
-\item
+	\item Denial of Service Angriffe auf Transponder sind sehr leicht durchführbar
+	\item RFID blockierende Beutel ($\Rightarrow$ Faradayscher Käfig)
+	\item Hohes Schadenspotenzial
+	\begin{itemize}
+		\item z.B. Diebstahlsicherungen im Einzelhandel
+	\end{itemize}
 \end{itemize}
 \end{frame}
 
@@ -301,7 +297,13 @@
 \frametitle{Fazit}
 
 \begin{itemize}
-\item
+	\item RFID bietet viele Möglichkeiten
+	\begin{itemize}
+		\item Kontaktloses Bezahlen, Diebstahlsicherung, Kontaktlose Zugangskontrollen, etc...
+	\end{itemize}
+	\item Schwachstellen beachten
+	\item Sicherheit an die jeweiligen Anforderungen anpassen
+	\item Privatsphäre der Nutzer beachten
 \end{itemize}
 \end{frame}
 
