@@ -96,16 +96,16 @@ Wie bereits in dem Abschnitt mit den Grundlagen der RFID Technik beschrieben, ü
 Ein weiteres Problem ist, dass das Lesegerät, welches Daten von einem Transponder anfragt, nicht weiß was für Daten es von dem Transponder erhält. Diese Daten müssen aber trotzdem verarbeitet werden. Dies kann ohne Sicherheitsvorkehrungen dazu führen, dass verarbeitende Prozesse oder Datenbanken, welche diese Daten speichern sollen, Schaden nehmen können.
 
 \subsection{Lesegerät muss Transponder lesen}
-Ein RFID/NFC Lesegerät muss, wenn ein Transponder in seine Nähe kommt, diesen Transponder auch lesen. Ohne den Transponder zu lesen, kann das Lesegerät nicht entscheiden ob dieser Transponder wichtig ist oder nicht. Damit besteht von außen die Möglichkeit Reaktionen des Lesegerätes herbeizuführen \cite{b3}. Dies stellt ebenfalls ein Problem dar und lässt sich wie im nächsten Kapitel genauer erläutert ausnutzen.
+Aber nicht nur der Speicherinhalt eines Transponders stellt ein Problem für das Lesegerät dar, sondern auch der Lesevorgang an sich. Ein RFID/NFC Lesegerät muss, wenn ein Transponder in seine Nähe kommt, diesen Transponder auch lesen. Ohne den Transponder zu lesen, kann das Lesegerät nicht entscheiden ob dieser Transponder wichtig ist oder nicht. Damit besteht von außen die Möglichkeit Reaktionen des Lesegerätes herbeizuführen \cite{b3}. Dies stellt ebenfalls ein Problem dar und lässt sich wie im nächsten Kapitel genauer erläutert ausnutzen.
+
+\subsection{Übertragung}
+Beim Lesen des Transponders durch das Lesegerät treten ebenfalls Probleme auf. Ursprünglich ist RFID mit dem Standard ISO/IEC 18000 so standardisiert worden, dass die Übertragung zwischen Lesegerät und Transponder im Klartext geschieht. Dies sorgt dafür, dass die Übertragung abgehört werden kann.
 
 \subsection{Eindeutige Identifikation}
 Des Weiteren lässt sich sowohl der Speicherinhalt als auch die eindeutige Identifikationsnummer des Transponders dazu verwenden diesen zu identifizieren. Dies ist in vielen Situationen vermutlich gewünscht, kann aber auch ein Sicherheitsrisiko darstellen.
 
 \subsection{Energieversorgung}
 Damit ein passiver RFID Transponder funktionieren kann muss durch das Lesegerät eine Spannung induziert werden, welche dafür sorgt, dass der Transponder Daten versenden kann. Wird der RFID Transponder zum Beispiel durch einen Faradayschen Käfig abgeschirmt, wird der RFID Transponder nicht mit Energie versorgt und das Lesegerät bekommt keine Daten von dem RFID Transponder übermittelt.
-
-\subsection{Übertragung}
-Ursprünglich ist RFID mit dem Standard ISO/IEC 18000 so standardisiert worden, dass die Übertragung zwischen Lesegerät und Transponder im Klartext geschieht. Dies sorgt dafür, dass die Übertragung abgehört werden kann.
 
 \section{Angriffe auf Sicherheit und Privatsphäre}
 Mit den im vorherigem Abschnitt beschriebenen Schwachstellen lassen sich mögliche Angriffsszenarien beschreiben welche die Sicherheit eines Systems ohne entsprechende Gegenmaßnahmen gefährden würden.
@@ -116,7 +116,7 @@ Bei der Verwendung von Transpondern ohne Authentifikation lässt sich der Transp
 Diese Kopiervorgänge können innerhalb weniger Sekunden geschehen und brauchen nur einen flüchtigen Kontakt mit dem Originaltransponder. Dies kann zum Problem werden, wenn beispielsweise ein RFID Transponder an einem Schlüsselbund oder eine Karte in einer Brieftasche kurz aus den Augen gelassen wird. In der Zeit könnte ein Angreifer, ohne Aufmerksamkeit zu erregen, die Daten der jeweiligen Transponder kopiert haben.
 
 \subsection{Kom­pro­mit­tie­ren des Lesegerätes}
-Die Möglichkeit einfach einen RFID/NFC Transponder auszulesen stellt nicht nur ein Problem für die Sicherheit der Daten auf dem Transponder da. Durch das einfache Auslesen kann auch die Sicherheit des Lesegerätes und der darunter liegenden Softwareinfrastruktur entstehen. Dieses Problem entsteht dadurch, dass ein Lesegerät jeden Transponder liest, welcher sich in Reichweite ist. Befindet sich unter diesen Transpondern ein Transponder welcher Schadcode als Daten enthält, wird das Lesegerät, beispielsweise ein Smartphone oder eine Türsteuerung, dessen Daten ebenfalls lesen und verarbeiten. Wird auf Seiten des Lesegerätes nun nicht dafür gesorgt, dass Schadcode unschädlich gemacht wird, kommt dieser Schadcode ungehindert in tiefere Systembereiche.
+Die Möglichkeit einen RFID/NFC Transponder auszulesen stellt nicht nur ein Problem für die Sicherheit der Daten auf dem Transponder da. Durch das Auslesen kann auch die Sicherheit des Lesegerätes und der darunter liegenden Softwareinfrastruktur entstehen. Dieses Problem entsteht dadurch, dass ein Lesegerät jeden Transponder liest, welcher sich in Reichweite ist. Befindet sich unter diesen Transpondern ein Transponder welcher Schadcode als Daten enthält, wird das Lesegerät, beispielsweise ein Smartphone oder eine Türsteuerung, dessen Daten ebenfalls lesen und verarbeiten. Wird auf Seiten des Lesegerätes nun nicht dafür gesorgt, dass Schadcode unschädlich gemacht wird, kommt dieser Schadcode ungehindert in tiefere Systembereiche.
 Durch die verhältnismäßig kleine Speichergröße eines RFID Transponders von Bytes bis wenigen Kilobytes, beispielsweise 4 kB bei der MIFARE Classic EV1 4K \cite{b4}, ist die Größe des Schadcodes begrenzt, reicht aber aus um Schaden anzurichten \cite{b5}. Bei dem Schadcode kann es sich beispielsweise um SQL Injections handeln. Ein Beispielszenario wäre, dass ein Transponder mit einem schädlichen SQL Statement wie
 \begin{lstlisting}[xleftmargin=.07\textwidth, xrightmargin=.07\textwidth]
 "; DROP TABLE <tabellenname>
